@@ -62,10 +62,13 @@
 				<div ng-repeat="var in productos" class="col-sm-4"> 
 				
 					<p><strong> {{ var.name }}</strong></p> 
-					<img src="img/logo.jpg"> </img>
+					<img ng-src="{{var.cover}}"> </img>
 					
 					<p class="price">{{ var.price | currency }}</p> 
 					<p class="date">{{ var.pubdate | date }}</p> 
+  					<p class="likes" ng-click="masUno($index)">{{var.likes}} </p> 
+
+
 				 
 				</div> 
 			</div>
