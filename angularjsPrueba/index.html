@@ -66,7 +66,8 @@
 					
 					<p class="price">{{ var.price | currency }}</p> 
 					<p class="date">{{ var.pubdate | date }}</p> 
-  					<p class="likes" ng-click="masUno($index)">{{var.likes}} </p> 
+  					<p class="likes" ng-click="masUno($index)">+{{var.likes}} </p>
+  					<p class="dislikes" ng-click="menosUno($index)">negativo{{var.dislikes }} </p>
 
 
 				 
