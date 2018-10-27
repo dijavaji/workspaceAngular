@@ -2,6 +2,12 @@
   heroes trabajando!
 </p>
 <!--<h1>{{nombreHeroe}}</h1> -->
-<h2>{{heroe.nombre | uppercase}} Detalle</h2>
-<div><span>id: </span>{{heroe.id}}</div>
-<div><span>nombre: </span>{{heroe.nombre}}</div>
+<p>{{heroe.nombre | uppercase}} Detalle</p>
+<div><p><span>id: </span>{{heroe.id}}</p></div>
+<div><p><span>nombre: </span>{{heroe.nombre}}</p></div>
+
+<div>
+  <label>nombre:
+    <input [(ngModel)]="heroe.nombre" placeholder="nombre">
+  </label>
+</div>
