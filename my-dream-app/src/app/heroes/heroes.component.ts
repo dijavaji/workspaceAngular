@@ -13,7 +13,7 @@ export class HeroesComponent implements OnInit {
     	nombre: 'Spiderman',
     	apellido: 'Parker',
     	nacionalidad: 'neoyorquino',
-    	poder: null
+    	poder: ''
   	};
 
 	constructor() { }
