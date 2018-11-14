@@ -11,7 +11,8 @@ export class HeroesComponent implements OnInit {
 	heroe: Heroe = {
     id: 1,
     nombre: 'Spiderman',
-    nacionalidad:'neyorquino'
+    apellido: 'Parker',
+    nacionalidad: 'neoyorquino'
   	};
 
 	constructor() { }
