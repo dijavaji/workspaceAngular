@@ -9,10 +9,11 @@ import {Heroe} from '../clases/Heroe';
 export class HeroesComponent implements OnInit {
 	
 	heroe: Heroe = {
-    id: 1,
-    nombre: 'Spiderman',
-    apellido: 'Parker',
-    nacionalidad: 'neoyorquino'
+    	id: 1,
+    	nombre: 'Spiderman',
+    	apellido: 'Parker',
+    	nacionalidad: 'neoyorquino',
+    	poder: null
   	};
 
 	constructor() { }
