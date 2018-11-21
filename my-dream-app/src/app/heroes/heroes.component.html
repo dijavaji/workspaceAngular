@@ -12,3 +12,10 @@
     <input [(ngModel)]="heroe.poder" placeholder="poder">
   </label>
 </div>
+
+<h2>Mis Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let var of heroes">
+    <span class="badge">{{var.id}}</span> {{var.nombre}}
+  </li>
+</ul>
