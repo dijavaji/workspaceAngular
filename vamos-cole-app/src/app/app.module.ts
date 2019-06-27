@@ -13,6 +13,9 @@ import { RouterModule } from '@angular/router';
 //import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TechHeaderComponent } from './template/tech-header/tech-header.component';
+import { TechComponentComponent } from './template/tech-component/tech-component.component';
+import { TechSidebarComponent } from './template/tech-sidebar/tech-sidebar.component';
+import { TechFooterComponent } from './template/tech-footer/tech-footer.component';
 // Importar ReactiveFormsModule para los formularios
 //import { ReactiveFormsModule } from '@angular/forms';
 
@@ -23,7 +26,10 @@ import { TechHeaderComponent } from './template/tech-header/tech-header.componen
     CreaUsuarioComponent,
     UsuarioDetalleComponent,
     UsuarioListaComponent,
-    TechHeaderComponent
+    TechHeaderComponent,
+    TechComponentComponent,
+    TechSidebarComponent,
+    TechFooterComponent
   ],
   imports: [
     BrowserModule,
