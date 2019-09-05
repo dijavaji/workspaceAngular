@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>Usuarios</h1>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Usuario</th>
+                    <th>Email</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios | async">
+                    <td>{{usuario.name}}</td>
+                    <td>{{usuario.username}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td><button (click)="eliminaUsuario(usuario.id)">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <!--ul>
+      <li *ngFor="let usuario of usuarios | async" (click)="onSelect(usuario)">
+        <span>{{usuario.id}}</span> {{usuario.username}} {{usuario.email}}
+      </li>
+  </ul-->
+</div>

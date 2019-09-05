@@ -1,0 +1,25 @@
+<h3>Crear usuario</h3>
+<div [hidden]="presentar" style="width: 400px;">
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="nombreId">Nombre</label>
+            <input type="text" class="form-control" id="nombreId" required [(ngModel)]="usuario.name" name="name">
+        </div>
+
+        <div class="form-group">
+            <label for="apellidoId">Apellido</label>
+            <input type="text" class="form-control" id="apellidoId" required [(ngModel)]="usuario.username" name="username">
+        </div>
+
+        <div class="form-group">
+            <label for="emailId">Email</label>
+            <input type="text" class="form-control" id="emailId" required [(ngModel)]="usuario.email" name="email">
+        </div>
+
+        <button type="submit" class="btn btn-success">Aceptar</button>
+    </form>
+</div>
+
+<div [hidden]="!presentar">
+    <h4>Guardado exitosamente!</h4>
+</div>

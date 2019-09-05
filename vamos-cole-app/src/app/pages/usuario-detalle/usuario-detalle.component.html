@@ -1,0 +1,46 @@
+<!--div *ngIf="usuario">
+    <div>
+        <label>Id: </label> {{usuario.id}}
+    </div>
+    <div>
+        <label>Nombre: </label> {{usuario.name}}
+    </div>
+    <div>
+        <label>Usuario: </label> {{usuario.userName}}
+    </div>
+    <div>
+        <label>Email: </label> {{usuario.emailId}}
+    </div>
+    
+
+    <span class="button is-small btn-primary" *ngIf='usuario.activo' (click)='updateActive(false)'>Inactivo</span>
+
+    <span class="button is-small btn-primary" *ngIf='!usuario.activo' (click)='updateActive(true)'>Activo</span>
+
+    <span class="button is-small btn-danger" (click)='eliminaUsuario()'>Eliminar</span>
+
+    <hr/>
+</div-->
+
+<div *ngIf="usuario">
+
+  <h2>{{usuario.name | uppercase}} Detalle</h2>
+  <div><span>id: </span>{{usuario.id}}</div>
+  <div>
+    <label>Nombre:
+      <input [(ngModel)]="usuario.name" placeholder="name"/>
+    </label>
+  </div>
+
+  <div>
+    <label>Usuario:
+      <input [(ngModel)]="usuario.userName"/>
+    </label>
+  </div>
+  <div>
+    <label>Email:
+      <input [(ngModel)]="usuario.emailId" placeholder="emailId"/>
+    </label>
+  </div>
+      <button type="button" class="btn" (click)='eliminaUser()'>Eliminar</button>
+</div>

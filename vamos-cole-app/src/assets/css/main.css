@@ -155,6 +155,68 @@ nav a:hover {
    ========================================================================== */
 
 
+.footer-container footer {
+    color: white;
+    padding: 20px 0;
+}
+
+/* ===============
+    ALL: IE Fixes
+   =============== */
+
+.ie7 .title {
+    padding-top: 20px;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+nav ul,
+nav ol, 
+nav li {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+nav a {
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+nav ul ul {
+    max-width: 11em;
+    background-color: #f16529;
+}
+
+nav ul ul li {
+    width: 100%;
+}
+nav ul ul {
+    max-width: 11em;
+    background-color: #f16529;
+    position: absolute;
+}
+
+nav ul ul {
+    max-width: 11em;
+    background-color: #f16529;
+    position: absolute;
+    z-index: 99;
+}
+
+nav ul ul {
+    max-width: 11em;
+    background-color: #f16529;
+    position: absolute;
+    z-index: 99;
+    display: none;
+}
+
+nav li:hover ul {
+    display: block;
+}
 
 
 
@@ -180,9 +242,9 @@ nav a:hover {
 
     nav a {
         float: left;
-        width: 27%;
+        /*width: 27%;*/
         margin: 0 1.7%;
-        padding: 25px 2%;
+        /*padding: 25px 2%;*/
         margin-bottom: 0;
     }
 

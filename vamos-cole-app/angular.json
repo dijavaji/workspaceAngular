@@ -23,13 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/css/main.css",
-              "src/assets/css/normalize.min.css"  
+              "src/styles.css"
             ],
-            "scripts": [
-              "src/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"    
-            ],
+            "scripts": [],
             "es5BrowserSupport": true
           },
           "configurations": {
