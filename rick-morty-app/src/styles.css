@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+.sidenav {
+background-color: #f1f1f1;
+}
+/* Set black background color, white text and some padding */
+.header, footer {
+background-color: #343a40;
+color: white;
+padding: 15px;
+}
+
+.img-banner {
+width: 7em;
+height: 7em;
+}
+.text-banner {
+font-size: 24px;
+}
+.no-margin-left {
+margin-left: 0!important;
+padding-left: 0!important;
+}
+.no-margin-right {
+margin-right: 0!important;
+padding-right: 0!important;
+}

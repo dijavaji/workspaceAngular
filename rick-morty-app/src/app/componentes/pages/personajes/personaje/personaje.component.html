@@ -1,0 +1,16 @@
+<div class="card">
+<div class="image">
+	<a>
+	  <img [src]="personaje.imagen" [alt]="personaje.nombre" class="card-img-top"/>
+	</a>
+</div>
+<div class="card-inner">
+<div class="header">
+  <a>
+    <h2>{{ personaje.nombre | slice: 0:15}}</h2>
+  </a>
+  <h4 class="text-muted">{{ personaje.genero }}</h4>
+  <small class="text-muted">{{ personaje.creado | date }}</small>
+</div>
+</div>
+</div>`
