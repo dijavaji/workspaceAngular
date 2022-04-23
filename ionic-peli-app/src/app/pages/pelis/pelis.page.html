@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>My Blockbuster app</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-searchbar [(ngModel)]="nombre" (ionChange)="busquedaChanged($event)"></ion-searchbar>
+	<ion-item>
+		<ion-label>Seleccione el tipo</ion-label>
+		<ion-select [(ngModel)]="tipo" (ionChange)="busquedaChanged($event)">
+			<ion-select-option selected="true" value="">Todos</ion-select-option>
+			<ion-select-option value="movie">Peliculas</ion-select-option>
+			<ion-select-option value="series">Series</ion-select-option>
+			<ion-select-option value="episode">Episodios</ion-select-option>
+		</ion-select>
+	</ion-item>
+
+	<ion-list>
+		<ion-item button *ngFor="let pelicula of (results | async)" [routerLink]="['/','peli-detalle',pelicula.imdbID]">
+			<ion-avatar slot='start'>
+				<img src="{{pelicula.Poster}}" alt="{{pelicula.Title}}" *ngIf="pelicula.Poster != 'N/A'">
+			</ion-avatar>
+			<ion-label text-wrap>
+				<h3>{{pelicula.Title}}</h3>
+				{{pelicula.Year}}
+			</ion-label>
+			<ion-icon slot="end" *ngIf="pelicula.Type === 'movie'" name="videocam"></ion-icon>
+			<ion-icon slot="end" *ngIf="pelicula.Type === 'series'" name="tv"></ion-icon>
+			<ion-icon slot="end" *ngIf="pelicula.Type === 'episode'" name="tablet-portrait"></ion-icon>
+		</ion-item>
+	</ion-list>
+</ion-content>
