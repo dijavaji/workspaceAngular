@@ -1,0 +1,19 @@
+<mat-card>
+	<mat-card-title> Mapa</mat-card-title>
+	<mat-card-content>
+		<!-- this creates a google map on the page with the given lat/lng from -->
+		<!-- the component as the initial center of the map: -->
+		<agm-map (mapClick)="agregarMarcador($event)" [latitude]="lat" [longitude]="lng" [zoom]="15">
+		  <agm-marker *ngFor="let marcador of marcadores; let i = index" [latitude]="marcador.lat" [longitude]="marcador.lng">
+		  	<agm-info-window [disableAutoPan]="true">
+  				<strong>{{marcador.titulo}}</strong>
+  				<p> {{marcador.desc}}</p>
+  				<button (click)="editarMarcador(marcador)" mat-raised-button color="primary">Editar</button>
+  				<button (click)="borrarMarcador(i)" mat-raised-button color="warn">Borrar</button> 
+			</agm-info-window>
+
+		  </agm-marker>
+		</agm-map>
+
+	</mat-card-content>
+</mat-card>

@@ -1,0 +1,50 @@
+
+<mat-card>
+	<mat-card-title> Mapa</mat-card-title>
+	<mat-card-content>
+		<agm-map [latitude]="currentPos.lat" [longitude]="currentPos.lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
+ 			(mapClick)="mapClicked($event)">
+			<!--agm-marker *ngFor="let point of points" [latitude]="point.startPoint.lat" [longitude]="point.startPoint.lng"></agm-marker-->
+			<agm-polyline strokeColor="red">
+				<agm-polyline-point *ngFor="let point of points" [latitude]="point.lat" [longitude]="point.lng"></agm-polyline-point>
+			</agm-polyline>
+
+		</agm-map>
+	</mat-card-content>		
+</mat-card>	
+
+
+<table>
+    <thead>
+        <tr>
+            <th>distance</th><th>narrative</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of maneuvers">
+            <td>{{p.distance}}</td>
+            <td>{{p.narrative}}</td>
+            <!--td>{{p.price | currency:"USD":"symbol":"2.2-2"}}</td-->
+            
+        </tr>
+    </tbody>
+</table>
+
+
+<!--{{maneuvers | json}}-->
+
+
+<!--mat-card>	api antigua
+	<mat-card-title> Mapa</mat-card-title>
+	<mat-card-content>
+		<agm-map [latitude]="currentPos.lat" [longitude]="currentPos.lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
+ 			(mapClick)="mapClicked($event)">
+			<agm-marker *ngFor="let point of maneuvers" [latitude]="point.startPoint.lat" [longitude]="point.startPoint.lng"></agm-marker>
+			<agm-polyline strokeColor="red">
+				<agm-polyline-point *ngFor="let point of maneuvers" [latitude]="point.startPoint.lat" [longitude]="point.startPoint.lng"></agm-polyline-point>
+			</agm-polyline>
+
+		</agm-map>
+	</mat-card-content>		
+</mat-card-->	
