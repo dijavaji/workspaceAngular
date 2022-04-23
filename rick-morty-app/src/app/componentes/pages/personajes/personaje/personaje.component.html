@@ -1,16 +1,16 @@
 <div class="card">
 <div class="image">
-	<a>
+	<a *ngFor="let personaje of personajes | async">
 	  <img [src]="personaje.imagen" [alt]="personaje.nombre" class="card-img-top"/>
 	</a>
 </div>
-<div class="card-inner">
-<div class="header">
-  <a>
-    <h2>{{ personaje.nombre | slice: 0:15}}</h2>
+<!--div class="card-inner">
+<div class="grid grid-pad">
+  <a *ngFor="let personaje of personajes" [routerLink]="['/personaje-detalle', personaje.id]" class="col-1-4">
+    <h2>{{ personaje.nombre}}</h2>
   </a>
   <h4 class="text-muted">{{ personaje.genero }}</h4>
-  <small class="text-muted">{{ personaje.creado | date }}</small>
+  <small class="text-muted">{{ personaje.creado }}</small>
 </div>
+</div-->
 </div>
-</div>`

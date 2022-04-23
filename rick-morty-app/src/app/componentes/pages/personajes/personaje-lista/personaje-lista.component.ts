@@ -4,6 +4,7 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import {ActivatedRoute, NavigationEnd, ParamMap, Router} from '@angular/router';
 
 import { filter, take } from 'rxjs/operators';
+
 import {Personaje} from '@shared/modelo/personaje';
 import { PersonajeService } from '@shared/servicios/personaje.service';
 import { TrackHttpError } from '@shared/modelo/trackHttpError';
@@ -86,7 +87,8 @@ export class PersonajeListaComponent implements OnInit {
   }
 
   private getDataFromService(): void {
-    
+    this.personajeSvc.buscarPersonajes(this.query,this.pageNum).pipe(take(1)).subscribe((res: any)  => {
+       this.personajes = res;}, err => {console.error(err);})
   }
 
 }

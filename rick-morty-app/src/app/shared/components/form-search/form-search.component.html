@@ -3,7 +3,7 @@
   <p>Wubba Lubba Dub Dub</p> 
   <form>
     <div class="input-group">
-      <input type="text" class="form-control" size="50" placeholder="Buscar..." required>
+      <input #inputSearch autofocus type="text" class="form-control-lg" size="50" placeholder="Buscar..." (keyup)="onBusqueda(inputSearch.value)"/>
       <div class="input-group-btn">
         <button type="button" class="btn btn-danger">buscar</button>
       </div>

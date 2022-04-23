@@ -14,6 +14,9 @@ import { catchError } from 'rxjs/operators';
 })
 export class PersonajeService {
 
+  readonly URL_SRV_RICKMORTY = environment.urlApiRickMorty;
+  private headers = new Headers({ 'Content-Type': 'application/json' });
+
   constructor(private http: HttpClient) {}
 
   buscarPersonajes(query = '', page = 200):Observable<Personaje[] | TrackHttpError> {
@@ -26,6 +29,14 @@ export class PersonajeService {
     .pipe(catchError((err) => this.handleHttpError(err)));
   }
 
+  //getPersonajes(): Promise<Personaje[]> {
+    //return this.http.get(`${environment.urlApiRickMorty}`).toPromise()
+        //.then(response => response.json().data as Personaje[]).catch(this.handleError);
+  //}
+
+  getPersonajes(): Observable<any> {
+    return this.http.get(`${environment.urlApiRickMorty}`);
+  }
 
   private handleHttpError(error:HttpErrorResponse):Observable<TrackHttpError>{
 
@@ -34,6 +45,11 @@ export class PersonajeService {
     dataError.message = error.statusText;
     dataError.friendlyMessage = 'Se produjo un error al recuperar datos';
     return throwError(dataError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('Un error a ocurrido', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
 }
