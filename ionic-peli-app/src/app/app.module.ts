@@ -16,3 +16,9 @@ import { HttpClientModule }	from '@angular/common/http'
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+/*Ionic 4 & Angular 7 movieAPP
+https://www.youtube.com/watch?v=b69HKIT1Fs8
+inicia server
+ionic serve
+*/

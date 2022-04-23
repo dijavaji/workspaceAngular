@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col bg-dark text-white">
+      <a class="navbar-brand">RICKY STORE</a>
+    </div>
+  </div>
+</div>
+<div *ngIf="orderSent" class="m-2 text-center">
+  <h2>Thanks!</h2>
+  <p>Thanks for placing your order.</p>
+  <p>We'll ship your goods as soon as possible.</p>
+  <button class="btn btn-primary" routerLink="/store">Return to Store</button>
+</div>
+<form *ngIf="!orderSent" #form="ngForm" novalidate (ngSubmit)="submitOrder(form)" class="m-2">
+  <div class="form-group">
+    <label>First Name</label>
+    <input class="form-control" #firstname="ngModel" name="firstname" [(ngModel)]="order.user.name.firstname" required />
+    <span *ngIf="submitted && firstname.invalid" class="text-danger">
+      Please enter your first name
+    </span>
+  </div>
+  <div class="form-group">
+    <label>Last name</label>
+    <input class="form-control" #lastname="ngModel" name="name" [(ngModel)]="order.user.name.lastname" required />
+    <span *ngIf="submitted && lastname.invalid" class="text-danger">
+      Please enter your last name
+    </span>
+  </div>
+  <div class="form-group">
+    <label>User name</label>
+    <input class="form-control" #username="ngModel" name="username" [(ngModel)]="order.user.username" required />
+    <span *ngIf="submitted && username.invalid" class="text-danger">
+      Please enter your user name
+    </span>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input class="form-control" #password="ngModel" name="password" [(ngModel)]="order.user.password" required />
+    <span *ngIf="submitted && password.invalid" class="text-danger">
+      Please enter your password
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label>Phone</label>
+    <input class="form-control" #phone="ngModel" name="phone" [(ngModel)]="order.user.phone" required />
+    <span *ngIf="submitted && phone.invalid" class="text-danger">
+      Please enter your phone
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label>Address</label>
+    <input class="form-control" #address="ngModel" name="address" [(ngModel)]="order.user.address.street" required />
+    <span *ngIf="submitted && address.invalid" class="text-danger">
+      Please enter your address
+    </span>
+  </div>
+  <div class="form-group">
+    <label>City</label>
+    <input class="form-control" #city="ngModel" name="city"
+            [(ngModel)]="order.user.address.city" required />
+    <span *ngIf="submitted && city.invalid" class="text-danger">
+      Please enter your city
+    </span>
+  </div>
+  
+  <div class="form-group">
+    <label>Zip/Postal Code</label>
+    <input class="form-control" #zip="ngModel" name="zip"
+            [(ngModel)]="order.user.address.zipcode" required />
+    <span *ngIf="submitted && zip.invalid" class="text-danger">
+      Please enter your zip/postal code
+    </span>
+  </div>
+  <div class="form-group">
+    <label>Number</label>
+    <input class="form-control" #number="ngModel" name="number"
+            [(ngModel)]="order.user.address.number" required />
+    <span *ngIf="submitted && number.invalid" class="text-danger">
+      Please enter your number
+    </span>
+  </div>
+<div class="text-center">
+    <button class="btn btn-secondary m-1" routerLink="/cart">Back</button>
+    <button class="btn btn-primary m-1" type="submit">Complete Order</button>
+  </div>
+</form>              
