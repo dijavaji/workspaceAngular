@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 import { Observable } from 'rxjs';
 import { interval } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { debounceTime, tap, switchMap, finalize, distinctUntilChanged, filter } from 'rxjs/operators';
+
 //import 'rxjs/add/observable/interval';
 //import 'rxjs/add/operator/takeWhile';
 import {UbicacionService} from '../../services/ubicacion.service';
@@ -18,12 +22,12 @@ export class RastreoComponent implements OnInit {
   zoom: number = 16;
 
   // initial center position for the map
-  currentPos: point = {
+  currentPos: Point = {
     lat: -0.2558039,
     lng: -78.5225297
   };
   points: Marcador[] = [];
-  tmpPoints: point[] = [
+  tmpPoints: Point[] = [
     this.currentPos,
     {
       lat: 50.082911,
@@ -47,13 +51,30 @@ export class RastreoComponent implements OnInit {
     }
   ]
 
-  public maneuvers: any []=[];
+	public maneuvers: any []=[];
+
+	// propiedades busqueda autocomplete
+	myControl: FormControl = new FormControl();
+	options = [{name:'Angular'}, {name:'React'}, {name:'Vue'}];
+	filteredOptions: any;
+	isLoading = false;
+	errorMsg!: string;
+	minLengthTerm = 3;
+	selectedMovie: any = "";
+
+	//propiedades de la ruta origen destino
+	modeInput = "start";
+	wayPoints: WayPoints = new WayPoints();
+	inicio:string ="";
+	fin:string="";
 
 	constructor(private servicio:UbicacionService) { }
 
 	ngOnInit() {
-    this.trackingPoints();
-  }
+		//this.trackingPoints();
+   		this.loadOption();
+   		this.getPoints();
+   	}
 
   trackingPoints(){
   	/*let i = 0;
@@ -86,16 +107,129 @@ export class RastreoComponent implements OnInit {
 		//this.marcadores.push(nuevoMarcador);		  	
   }
 
+  private getPoints():void{
+  	console.log('***** get points '+ this.selectedMovie);
+  	this.maneuvers.splice(0,this.maneuvers.length);
+  	this.trackingPoints();
+  }
+
   mapClicked(event){
 
   }
 
+
+  drawRoute():void{
+  	console.log('punto origen y destino '+JSON.stringify(this.wayPoints));
+
+  	this.servicio.getDirectionRoute(this.wayPoints.start.lng+","+this.wayPoints.start.lat,this.wayPoints.end.lng+","+this.wayPoints.end.lat).subscribe(
+  			res => {  
+  				const data = res.routes[0];
+  				const route = data.geometry.coordinates;	
+  				console.log(route);
+  			},err=>{console.error(err);});
+
+  }
+
+  changeMode(mode:string):void{
+  	this.modeInput = mode;
+  	console.log("cambio modo"+ mode);
+  }
+
+
+  onSelected() {
+    console.log(this.selectedMovie);
+    this.selectedMovie = this.selectedMovie;
+    if(this.tmpPoints.length == 0){
+    	this.tmpPoints = [];	
+    }
+    
+    if(this.modeInput === 'start'){
+
+    	console.log("selecciono inicio " + JSON.stringify (this.selectedMovie.geometry));
+    	this.wayPoints.start = new Point(this.selectedMovie.geometry.coordinates[1],this.selectedMovie.geometry.coordinates[0]);
+    	this.inicio = this.selectedMovie.place_name_es;
+    	this.currentPos.lat = this.wayPoints.start.lat;
+    	this.currentPos.lng = this.wayPoints.start.lng;
+    	this.tmpPoints.push(this.wayPoints.start);
+    }
+    if(this.modeInput === 'end'){
+    	console.log("selecciono fin " + JSON.stringify (this.selectedMovie.geometry));
+    	this.wayPoints.end = new Point(this.selectedMovie.geometry.coordinates[1],this.selectedMovie.geometry.coordinates[0]);
+    	this.fin = this.selectedMovie.place_name_es;
+
+    	this.currentPos.lat = this.wayPoints.end.lat;
+    	this.currentPos.lng = this.wayPoints.end.lng;
+    	this.tmpPoints.push(this.wayPoints.end);
+    }
+  }
+
+  private _filter(value: string): any[] {
+    const filterValue =  value.toLowerCase();
+
+    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
+
+   private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  displayFn(subject:any){
+  	return subject ? subject.place_name_es:"";
+  }
   
+
+  clearSelection() {
+    this.selectedMovie = "";
+    this.filteredOptions = [];
+  }
+
+
+  loadOption(){
+  	//this.filteredOptions = this.myControl.valueChanges.pipe(startWith(''));
+  	this.myControl.valueChanges.pipe(startWith(''),
+  		filter(res => {
+          return res !== null && res.length >= this.minLengthTerm
+        }),
+        distinctUntilChanged(),
+        debounceTime(1000),
+        tap(() => {
+          this.errorMsg = "";
+          this.filteredOptions = [];
+          this.isLoading = true;
+        }),
+        switchMap(value => this.servicio.getAddressesPlaces(value).pipe(finalize(() =>{this.isLoading = false})))
+  		).subscribe((data:any) => {
+  			console.log(JSON.stringify(data.features));
+  			if(data.features==undefined){
+  				this.errorMsg = data['Error'];
+  				this.filteredOptions = [];
+  			}else{
+  				this.errorMsg="";
+  				this.filteredOptions = data.features;
+  			}	
+  			console.log(this.filteredOptions);
+  		});
+
+  }
 
 }
 
 // just an interface for type safety.
-interface point {
+export class Point {
   lat: number;
   lng: number;
+
+  constructor(lat:number,lng:number){
+  	this.lat=lat;
+  	this.lng=lng;
+  }
+}
+
+export class Option{
+	name:string;
+}
+
+export class WayPoints{
+	start:Point;
+	end:Point;
 }

@@ -49,5 +49,17 @@ export class UbicacionService {
 		return this.http.get<any>(`https://api.mapbox.com/directions/v5/mapbox/driving/${from}%3B${to}?alternatives=true&geometries=geojson&language=en&overview=simplified&steps=true&access_token=pk.eyJ1IjoidGVjaG5vbG9xaWUiLCJhIjoiY2wyYXFqaXh2MDdhNjNkbGFqc3AwcDk5YSJ9.oZoaG9-b3ja4Vm7VM9uwHw`);
 	}
 
+	getAddressesPlaces(dir:string): Observable<any> {
+        console.log("busca dir "+dir);
+        return this.http.get<any>(`https://api.mapbox.com/geocoding/v5/mapbox.places/${dir}.json?proximity=ip&types=address%2Cplace&language=es&access_token=pk.eyJ1IjoidGVjaG5vbG9xaWUiLCJhIjoiY2wyYXFqaXh2MDdhNjNkbGFqc3AwcDk5YSJ9.oZoaG9-b3ja4Vm7VM9uwHw&autocomplete=true`);
+    }
+
+
+    getPeliculas(valor:string): Observable<any>{
+    	//http://www.omdbapi.com/?apikey=e8067b53&s=spider
+
+    	return this.http.get<any>(`http://www.omdbapi.com/?apikey=e8067b53&s=${valor}`);
+    }
+
 }
 

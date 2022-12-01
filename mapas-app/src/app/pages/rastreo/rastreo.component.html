@@ -1,10 +1,52 @@
+<div class="wrapper">
+	
+	<mat-form-field>
+		<input matInput
+	           placeholder="Search for a street"
+	           [formControl]="myControl"
+	           [(ngModel)]="selectedMovie"
+	           [matAutocomplete]="auto"/>
+
+	    <button *ngIf="selectedMovie" matSuffix mat-icon-button aria-label="Clear" (click)="clearSelection()">
+      		<mat-icon>close</mat-icon>
+    	</button>       
+	    <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onSelected()">
+	      	<mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+      		<ng-container *ngIf="!isLoading">
+		      <mat-option *ngFor="let option of filteredOptions" [value]="option">
+		        {{option.text_es}}
+		      </mat-option>
+			</ng-container>
+	    </mat-autocomplete>
+	</mat-form-field>
+
+	<br>
+	<button (click)="drawRoute()">Dibujar Ruta</button>
+</div>
+
+
+	<mat-form-field>
+		<div [ngClass]="{'active-way':modeInput==='start'}">
+			<input matInput placeholder="Inicio" type="text" [(ngModel)]="inicio" (click)="changeMode('start')" >
+		</div>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Fin" type="text" [(ngModel)]="fin" (click)="changeMode('end')" >
+	</mat-form-field>
+
+
+
 
 <mat-card>
 	<mat-card-title> Mapa</mat-card-title>
 	<mat-card-content>
 		<agm-map [latitude]="currentPos.lat" [longitude]="currentPos.lng" [zoom]="zoom" [disableDefaultUI]="false" [zoomControl]="false"
  			(mapClick)="mapClicked($event)">
-			<!--agm-marker *ngFor="let point of points" [latitude]="point.startPoint.lat" [longitude]="point.startPoint.lng"></agm-marker-->
+			<agm-marker *ngFor="let wayPoint of tmpPoints" [latitude]="wayPoint.lat" [longitude]="wayPoint.lng"></agm-marker>
+			
+			<agm-marker  [latitude]="-0.255721" [longitude]="-78.520332" [iconUrl]="{url: './assets/img/app_arrow.svg',scaledSize: {height: 30, width: 30}}"></agm-marker>
+
 			<agm-polyline strokeColor="red">
 				<agm-polyline-point *ngFor="let point of points" [latitude]="point.lat" [longitude]="point.lng"></agm-polyline-point>
 			</agm-polyline>

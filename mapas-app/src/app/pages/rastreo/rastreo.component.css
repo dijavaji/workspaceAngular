@@ -1,3 +1,9 @@
 agm-map {
   height: 600px;
 }
+
+active-way{
+	border-top-color: green;
+	border-top-style: solid;
+	border-top-width: 1px;
+}

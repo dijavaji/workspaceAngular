@@ -33,6 +33,8 @@ export class MapaComponent implements OnInit {
 		const coords : {lat:number,lng : number} = evento.coords;
 		const nuevoMarcador = new Marcador(coords.lat,coords.lng);
 		this.marcadores.push(nuevoMarcador);
+		//this.lat = coords.lat; se agrega para centrar mapa en dir marcada [agmFitBounds]="true"
+		//this.lng = coords.lng;
 		this.guardarStorage();
 		// agrego un mensaje simple con material
 		this.snackBar.open('Marcador agregado', 'Cerrar', {duration:3000});
