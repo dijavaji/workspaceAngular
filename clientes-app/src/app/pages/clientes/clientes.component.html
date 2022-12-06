@@ -2,8 +2,10 @@
   <div class="card-header">Clientes</div>
   <div class="card-body">
     <h5 class="card-title">Listado de clientes</h5>
-        
-    <table class="table table-bordered table-striped ">
+    <div *ngIf="clientes?.length == 0" class="alert alert-info">
+        No existen registros.
+    </div>
+    <table class="table table-bordered table-striped " *ngIf="clientes?.length > 0">
     	<thead>
     		<tr>
     			<th>id</th>
