@@ -3,7 +3,7 @@
   <div class="card-body">
     <h5 class="card-title">Listado de clientes</h5>
         
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped ">
     	<thead>
     		<tr>
     			<th>id</th>
@@ -11,6 +11,8 @@
     			<th>apellido</th>
     			<th>email</th>
     			<th>fecha</th>
+                <th>editar</th>
+                <th>eliminar</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -20,6 +22,8 @@
     			<td>{{cliente.apellido}}</td>
     			<td>{{cliente.email}}</td>
     			<td>{{cliente.createAt}}</td>
+                <td> <button type="button" name="crear" [routerLink]="['/clientes/form', cliente.id]" class="btn btn-primary">editar</button></td>
+                <td> <button type="button" name="eliminar" (click)='eliminarCliente(cliente)' class="btn btn-danger btn-sm">eliminar</button> </td>
     		</tr>
     		
     	</tbody>

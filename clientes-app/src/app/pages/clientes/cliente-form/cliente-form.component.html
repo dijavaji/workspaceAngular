@@ -26,10 +26,10 @@
 
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='crear()' *ngIf="!cliente.id else elseBlock">Crear</button>
+          <button class="btn btn-primary" role="button" (click)='crearCliente()' *ngIf="!cliente.id else elseBlock">Crear</button>
 
           <ng-template #elseBlock>
-            <button class="btn btn-primary" role="button" (click)='actualizar()'>Editar</button>
+            <button class="btn btn-primary" role="button" (click)='actualizarCliente()'>Editar</button>
           </ng-template>
         </div>
       </div>
