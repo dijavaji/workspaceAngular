@@ -25,20 +25,21 @@ export class ClienteFormComponent implements OnInit {
 	}
 
 	public crearCliente(): void{
-		console.log("crear click");
-		console.log(this.cliente);
+		//console.log("crear click");
+		//console.log(this.cliente);
 		this.clienteService.creaCliente(this.cliente).subscribe(cliente => {
         this.router.navigate(['/clientes']);
-        swal('Cliente nuevo', `Cliente ${cliente.nombre} creado correctamente.`, 'success');
+        swal('Cliente nuevo', `El cliente ${cliente.nombre} creado correctamente.`, 'success');
       }
       );
 
 	}
 
 	actualizarCliente(): void{
-		this.clienteService.actualizarCliente(this.cliente).subscribe( cliente => {
+		this.clienteService.actualizarCliente(this.cliente).subscribe( json => {
       		this.router.navigate(['/clientes'])
-      		swal('Cliente actualizado', `Cliente ${cliente.nombre} actualizado correctamente.`, 'success')
+          //console.log(cliente);
+      		swal('Cliente actualizado', `${json.mensaje}: ${json.cliente.nombre}`, 'success')
     		}
     	)
 	}
