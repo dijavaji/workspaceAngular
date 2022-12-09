@@ -1,0 +1,24 @@
+<ul *ngIf="paginas?.length >0" class="pagination" style="overflow: scroll;">
+	<li class="page-item" *ngIf="paginado.number > 0">
+		<a [routerLink]="['/clientes/page',paginado.number-1]" class="page-link">&laquo;</a>
+	</li>
+
+	<!--li [ngClass]= "paginado.number == 0 ?'disabled page-item': 'page-item'" lo mismo-->
+	<li [ngClass]= "paginado.first?'disabled page-item': 'page-item'" >
+		<a class="page-link" [routerLink]="['/clientes/page',0]">Primera</a>
+	</li>
+
+	<li *ngFor="let pagina of paginas" class="page-item" [ngClass]="pagina-1 == paginado.number?'active':'' ">
+		<span *ngIf="pagina -1 == paginado.number" class="page-link" >{{pagina}}</span>
+		<a *ngIf="pagina -1 != paginado.number" [routerLink]="['/clientes/page',pagina-1]" class="page-link">{{pagina}}</a>
+	</li>
+
+	<!--li [ngClass]= "paginado.number == paginado.totalPages-1 ? 'disabled page-item': 'page-item'"-->
+	<li [ngClass]= "paginado.last ? 'disabled page-item': 'page-item'">
+		<a class="page-link" [routerLink]="['/clientes/page',paginado.totalPages-1]">ultima</a>
+	</li>	
+
+	<li class="page-item" *ngIf="paginado.number < paginado.totalPages-1">
+		<a [routerLink]="['/clientes/page',paginado.number + 1]" class="page-link">&raquo;</a>
+	</li> 
+</ul>
