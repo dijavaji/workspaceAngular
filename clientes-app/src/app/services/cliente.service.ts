@@ -21,20 +21,36 @@ export class ClienteService {
 
 	constructor(private http:HttpClient, private router: Router) { }
 
-	getClientes(): Observable <Cliente[]> {
+	getClientes(page: number): Observable <any> {
 		//return of (CLIENTES);
 		//return this.http.get<Cliente[]>(this.urlEndPoint);	misma forma 
-		return this.http.get(this.urlEndPoint).pipe(
-			map(response => {
-					let clientes = response as Cliente[];
-					return clientes.map(cliente => {
+		return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+			// tap(response =>{
+			// 	let clientes = response as Cliente[];
+			// 	console.log('clienteService tap 1');
+			// 	clientes.forEach(cliente => { console.log(cliente.nombre);});
+			// 	}),
+			tap((response : any) =>{
+				//let clientes = response as Cliente[];
+				console.log('clienteService tap 1');
+				(response.content as Cliente[]).forEach(cliente => { console.log(cliente.nombre);});
+				}),
+
+			map((response: any) => {
+					(response.content as Cliente[]).map(cliente => {
 						cliente.nombre = cliente.nombre.toUpperCase();
 						//let datePipe = new DatePipe('es'); comentado se formatea desde la vista
 						//cliente.createAt = datePipe.transform(cliente.createAt,'dd/MM/yyyy');//datePipe.transform(cliente.createAt,'EEEE dd, MMMM yyyy'); //formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US'); otra forma
 						return cliente;
 					});
-				})
-			//map(function (response) { return response as Cliente[]})	//forma ecmasc6 
+					return response;
+				}),		//map(function (response) { return response as Cliente[]})	//forma ecmasc6
+			 tap( response =>{
+			 	console.log("ClienteService tap 2");
+			 	(response.content as Cliente[]).forEach(cliente =>{
+			 		console.log(cliente.nombre);
+			 });
+			})
 			);
 	}
 
