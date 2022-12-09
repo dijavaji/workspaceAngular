@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';    //agrego para ver el cambio del parametro
 import swal from 'sweetalert2';
 import {tap} from 'rxjs/operators';
 
@@ -14,17 +15,25 @@ import {ClienteService} from '../../services/cliente.service';
 export class ClientesComponent implements OnInit {
 
 	public clientes: Cliente[];
-	constructor(private clienteService: ClienteService) { 
+  public paginador: any;
+
+	constructor(private clienteService: ClienteService, private activatedRoute: ActivatedRoute) { 
 
 	}
 
 	ngOnInit() {
-    let page = 0;
+    //let page = 0;
+    this.activatedRoute.paramMap.subscribe( params =>{
+    let page:number = +params.get("page");    //hago un cast a number
+    if(!page){
+      page=0;
+    }  
 		this.clienteService.getClientes(page).pipe(
         tap(response=>{ console.log('ClientesComponent tap 3');
            (response.content as Cliente[]).forEach( cliente => {console.log(cliente.nombre);}); 
         })
-      ).subscribe( response => this.clientes = response.content as Cliente[] );
+      ).subscribe( response => {this.clientes = response.content as Cliente[]; this.paginador = response;});
+    });
 	}
 
 

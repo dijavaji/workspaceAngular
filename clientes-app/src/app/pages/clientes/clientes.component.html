@@ -30,6 +30,8 @@
     		
     	</tbody>
     </table>
+    <tec-paginator-nav *ngIf="paginador" [paginado]="paginador"></tec-paginator-nav>
+
     <div class="my-2 text-left">
         <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']"> Crear cliente</button>
     </div>
