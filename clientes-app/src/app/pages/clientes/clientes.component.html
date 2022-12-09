@@ -23,7 +23,7 @@
     			<td>{{cliente.nombre}}</td>
     			<td>{{cliente.apellido}}</td>
     			<td>{{cliente.email}}</td>
-    			<td>{{cliente.createAt}}</td>
+    			<td>{{cliente.createAt | date:"dd/MM/yyyy"}}</td>
                 <td> <button type="button" name="crear" [routerLink]="['/clientes/form', cliente.id]" class="btn btn-primary">editar</button></td>
                 <td> <button type="button" name="eliminar" (click)='eliminarCliente(cliente)' class="btn btn-danger btn-sm">eliminar</button> </td>
     		</tr>

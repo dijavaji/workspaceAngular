@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { formatDate, DatePipe } from '@angular/common';
 import {of, Observable, throwError} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
@@ -24,7 +25,15 @@ export class ClienteService {
 		//return of (CLIENTES);
 		//return this.http.get<Cliente[]>(this.urlEndPoint);	misma forma 
 		return this.http.get(this.urlEndPoint).pipe(
-			map(response => response as Cliente[])
+			map(response => {
+					let clientes = response as Cliente[];
+					return clientes.map(cliente => {
+						cliente.nombre = cliente.nombre.toUpperCase();
+						//let datePipe = new DatePipe('es'); comentado se formatea desde la vista
+						//cliente.createAt = datePipe.transform(cliente.createAt,'dd/MM/yyyy');//datePipe.transform(cliente.createAt,'EEEE dd, MMMM yyyy'); //formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US'); otra forma
+						return cliente;
+					});
+				})
 			//map(function (response) { return response as Cliente[]})	//forma ecmasc6 
 			);
 	}
