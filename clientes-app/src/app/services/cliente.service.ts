@@ -31,14 +31,18 @@ export class ClienteService {
 
 	creaCliente(cliente: Cliente):Observable <Cliente>{
 		return this.http.post(this.urlEndPoint, cliente, { headers: this.httpHeaders }).pipe(
-      map((response: any) => response.cliente as Cliente),
-      catchError(e => {
+		map((response: any) => response.cliente as Cliente),
+		catchError(e => {
 
-        console.error(e.error.mensaje);
-        swal(e.error.mensaje, e.error.error, 'error');
-        return throwError(e);
-      })
-    );
+			if(e.status == 400){
+				return throwError(e);				
+			}
+			console.log("se crea exeption");
+			console.error(e.error.mensaje);
+			swal(e.error.mensaje, e.error.error, 'error');
+			return throwError(e);
+		})
+		);
 	}
 
 	getCliente(id): Observable<Cliente>{
