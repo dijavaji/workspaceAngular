@@ -5,6 +5,10 @@ import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';  
 import localeES from '@angular/common/locales/es'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import {MatDatepickerModule, MatNativeDateModule} from '@angular/material'; cambio para soportar fecha latina
+import { MatDatepickerModule } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 //componentes
 import { AppComponent } from './app.component';
@@ -42,7 +46,8 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,MatDatepickerModule, MatMomentDateModule
   ],
   providers: [ClienteService, {provide: LOCALE_ID, useValue:'es'}],
   bootstrap: [AppComponent]

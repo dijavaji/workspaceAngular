@@ -56,8 +56,11 @@
       <div class="form-group row">
         <label for="createAt" class="col-form-label col-sm-2">Fecha</label>
         <div class="col-sm-6">
-          <input type="date" class="form-control" [(ngModel)]="cliente.createAt" name="createAt" >
-
+          <!--input type="date" class="form-control" [(ngModel)]="cliente.createAt" name="createAt" -->
+          <input matInput [matDatepicker]="myDatepicker" placeholder="Escojer fecha" class="form-control" [(ngModel)]="cliente.createAt" name="createAt" style="display: inline; width: 300px">
+           
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
         </div>
       </div>
 
