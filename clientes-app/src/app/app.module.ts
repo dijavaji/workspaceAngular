@@ -20,6 +20,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
 
 //servicios
 import { ClienteService } from './services/cliente.service';
+import { ClienteDetalleComponent } from './pages/clientes/cliente-detalle/cliente-detalle.component';
 
 
 registerLocaleData(localeES,'es'); //registro global de internacionalizacion
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'clientes/page/:page', component:ClientesComponent},
   {path: 'clientes/form', component:ClienteFormComponent},
   {path: 'clientes/form/:id', component:ClienteFormComponent},
+  {path: 'clientes/ver/:id', component:ClienteDetalleComponent},
 ];
 
 @NgModule({
@@ -40,7 +42,8 @@ const routes: Routes = [
     TecFooterComponent,
     ClientesComponent,
     ClienteFormComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    ClienteDetalleComponent
   ],
   imports: [
     BrowserModule,
