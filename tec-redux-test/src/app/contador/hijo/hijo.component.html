@@ -1,0 +1,18 @@
+<h3>Contador hijo</h3>
+<h4>{{contador}}</h4>
+
+
+<div class="row text-center">
+  <div class="col">
+    <button  (click)="multiplicar()" class="btn btn-primary"> Multiplicar</button>
+    <button  (click)="dividir()" class="btn btn-info"> Dividir</button>
+  </div>
+</div>
+
+<div class="row text-center">
+	<div class="col">
+		<tec-nieto [contador]="contador" (contadorCambio)="resetNieto($event)"></tec-nieto>
+
+	</div>
+
+</div>
